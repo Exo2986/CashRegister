@@ -64,7 +64,7 @@ SELECT Id, Name, Tags, Price FROM Products WHERE (Id = @Id)</CommandText>
               <Mapping SourceColumn="Price" DataSetColumn="Price" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="RegisterDBConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="InsertQuery" Modifier="Public" Name="InsertQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="InsertQuery">
+              <DbSource ConnectionRef="RegisterDBConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="InsertQuery" Modifier="Public" Name="InsertQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="InsertQuery">
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>INSERT INTO [dbo].[Products] ([Id], [Name], [Tags], [Price]) VALUES (@Id, @Name, @Tags, @Price);
@@ -78,7 +78,7 @@ SELECT Id, Name, Tags, Price FROM Products WHERE (Id = @Id)</CommandText>
                   </DbCommand>
                 </InsertCommand>
               </DbSource>
-              <DbSource ConnectionRef="RegisterDBConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="UpdateQuery">
+              <DbSource ConnectionRef="RegisterDBConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="UpdateQuery">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE [dbo].[Products] SET [Id] = @Id, [Name] = @Name, [Tags] = @Tags, [Price] = @Price WHERE (([Id] = @Original_Id) AND ([Name] = @Original_Name) AND ((@IsNull_Price = 1 AND [Price] IS NULL) OR ([Price] = @Original_Price)));
@@ -144,7 +144,7 @@ SELECT Id, Name FROM Tags WHERE (Id = @Id)</CommandText>
               <Mapping SourceColumn="Name" DataSetColumn="Name" />
             </Mappings>
             <Sources>
-              <DbSource ConnectionRef="RegisterDBConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteQuery" Modifier="Public" Name="DeleteQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="DeleteQuery">
+              <DbSource ConnectionRef="RegisterDBConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="DeleteQuery" Modifier="Public" Name="DeleteQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="DeleteQuery">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>DELETE FROM [dbo].[Tags] WHERE (([Id] = @Original_Id) AND ([Name] = @Original_Name))</CommandText>
@@ -154,6 +154,26 @@ SELECT Id, Name FROM Tags WHERE (Id = @Id)</CommandText>
                     </Parameters>
                   </DbCommand>
                 </DeleteCommand>
+              </DbSource>
+              <DbSource ConnectionRef="RegisterDBConnectionString (MySettings)" DbObjectName="dbo.Tags" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillById" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorGetMethodName="GetDataBy3" GeneratorSourceName="FillById" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy3" UserSourceName="FillById">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Id, Name FROM dbo.Tags WHERE Id LIKE '%' + @Value + '%'</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Value" ColumnName="Id" DataSourceName="[C:\USERS\EXOMA\SOURCE\REPOS\CASHREGISTER\CASHREGISTER\REGISTERDB.MDF].dbo.Tags" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@Value" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="Id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="RegisterDBConnectionString (MySettings)" DbObjectName="dbo.Tags" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByName" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillByName" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy4" UserSourceName="FillByName">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Id, Name FROM dbo.Tags WHERE Name LIKE '%'+ @Value +'%'</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Value" ColumnName="Name" DataSourceName="[C:\USERS\EXOMA\SOURCE\REPOS\CASHREGISTER\CASHREGISTER\REGISTERDB.MDF].dbo.Tags" DataTypeServer="nvarchar(50)" DbType="String" Direction="Input" ParameterName="@Value" Precision="0" ProviderType="NVarChar" Scale="0" Size="50" SourceColumn="Name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
               </DbSource>
               <DbSource ConnectionRef="RegisterDBConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="InsertQuery" Modifier="Public" Name="InsertQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy1" UserSourceName="InsertQuery">
                 <InsertCommand>
@@ -167,7 +187,7 @@ SELECT Id, Name FROM Tags WHERE (Id = @Id)</CommandText>
                   </DbCommand>
                 </InsertCommand>
               </DbSource>
-              <DbSource ConnectionRef="RegisterDBConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="UpdateQuery">
+              <DbSource ConnectionRef="RegisterDBConnectionString (MySettings)" DbObjectName="" DbObjectType="Unknown" GenerateShortCommands="true" GeneratorSourceName="UpdateQuery" Modifier="Public" Name="UpdateQuery" QueryType="NoData" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy2" UserSourceName="UpdateQuery">
                 <UpdateCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
                     <CommandText>UPDATE [dbo].[Tags] SET [Id] = @Id, [Name] = @Name WHERE (([Id] = @Original_Id) AND ([Name] = @Original_Name));
@@ -244,7 +264,7 @@ SELECT Id, Name, Modifier FROM Taxes WHERE (Id = @Id)</CommandText>
   <xs:element name="RegisterDBTables" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="RegisterDBTables" msprop:Generator_UserDSName="RegisterDBTables">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Products" msprop:Generator_TableClassName="ProductsDataTable" msprop:Generator_TableVarName="tableProducts" msprop:Generator_RowChangedName="ProductsRowChanged" msprop:Generator_TablePropName="Products" msprop:Generator_RowDeletingName="ProductsRowDeleting" msprop:Generator_RowChangingName="ProductsRowChanging" msprop:Generator_RowEvHandlerName="ProductsRowChangeEventHandler" msprop:Generator_RowDeletedName="ProductsRowDeleted" msprop:Generator_RowClassName="ProductsRow" msprop:Generator_UserTableName="Products" msprop:Generator_RowEvArgName="ProductsRowChangeEvent">
+        <xs:element name="Products" msprop:Generator_TableClassName="ProductsDataTable" msprop:Generator_TableVarName="tableProducts" msprop:Generator_TablePropName="Products" msprop:Generator_RowDeletingName="ProductsRowDeleting" msprop:Generator_RowChangingName="ProductsRowChanging" msprop:Generator_RowEvHandlerName="ProductsRowChangeEventHandler" msprop:Generator_RowDeletedName="ProductsRowDeleted" msprop:Generator_UserTableName="Products" msprop:Generator_RowChangedName="ProductsRowChanged" msprop:Generator_RowEvArgName="ProductsRowChangeEvent" msprop:Generator_RowClassName="ProductsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id">
@@ -272,7 +292,7 @@ SELECT Id, Name, Modifier FROM Taxes WHERE (Id = @Id)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Tags" msprop:Generator_TableClassName="TagsDataTable" msprop:Generator_TableVarName="tableTags" msprop:Generator_RowChangedName="TagsRowChanged" msprop:Generator_TablePropName="Tags" msprop:Generator_RowDeletingName="TagsRowDeleting" msprop:Generator_RowChangingName="TagsRowChanging" msprop:Generator_RowEvHandlerName="TagsRowChangeEventHandler" msprop:Generator_RowDeletedName="TagsRowDeleted" msprop:Generator_RowClassName="TagsRow" msprop:Generator_UserTableName="Tags" msprop:Generator_RowEvArgName="TagsRowChangeEvent">
+        <xs:element name="Tags" msprop:Generator_TableClassName="TagsDataTable" msprop:Generator_TableVarName="tableTags" msprop:Generator_TablePropName="Tags" msprop:Generator_RowDeletingName="TagsRowDeleting" msprop:Generator_RowChangingName="TagsRowChanging" msprop:Generator_RowEvHandlerName="TagsRowChangeEventHandler" msprop:Generator_RowDeletedName="TagsRowDeleted" msprop:Generator_UserTableName="Tags" msprop:Generator_RowChangedName="TagsRowChanged" msprop:Generator_RowEvArgName="TagsRowChangeEvent" msprop:Generator_RowClassName="TagsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id">
@@ -292,7 +312,7 @@ SELECT Id, Name, Modifier FROM Taxes WHERE (Id = @Id)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Taxes" msprop:Generator_TableClassName="TaxesDataTable" msprop:Generator_TableVarName="tableTaxes" msprop:Generator_RowChangedName="TaxesRowChanged" msprop:Generator_TablePropName="Taxes" msprop:Generator_RowDeletingName="TaxesRowDeleting" msprop:Generator_RowChangingName="TaxesRowChanging" msprop:Generator_RowEvHandlerName="TaxesRowChangeEventHandler" msprop:Generator_RowDeletedName="TaxesRowDeleted" msprop:Generator_RowClassName="TaxesRow" msprop:Generator_UserTableName="Taxes" msprop:Generator_RowEvArgName="TaxesRowChangeEvent">
+        <xs:element name="Taxes" msprop:Generator_TableClassName="TaxesDataTable" msprop:Generator_TableVarName="tableTaxes" msprop:Generator_TablePropName="Taxes" msprop:Generator_RowDeletingName="TaxesRowDeleting" msprop:Generator_RowChangingName="TaxesRowChanging" msprop:Generator_RowEvHandlerName="TaxesRowChangeEventHandler" msprop:Generator_RowDeletedName="TaxesRowDeleted" msprop:Generator_UserTableName="Taxes" msprop:Generator_RowChangedName="TaxesRowChanged" msprop:Generator_RowEvArgName="TaxesRowChangeEvent" msprop:Generator_RowClassName="TaxesRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id">

@@ -10,7 +10,7 @@
         Try
             Dim row = RegisterDBTables.Tags.NewTagsRow()
 
-            If String.IsNullOrWhiteSpace(tbxID.Text) Or String.IsNullOrWhiteSpace(tbxName.Text) Then
+            If String.IsNullOrWhiteSpace(tbxID.Text) Or String.IsNullOrWhiteSpace(tbxName.Text) Then 'Basic input validation
                 MessageBox.Show(Me, "Please input data.")
             End If
 
@@ -19,7 +19,7 @@
 
             RegisterDBTables.Tags.AddTagsRow(row)
 
-            TagsTableAdapter.Update(RegisterDBTables.Tags)
+            TagsTableAdapter.Update(RegisterDBTables.Tags) 'We do this to commit the changes back to the database so data persists when the program closes
 
             btnClear_Click(Nothing, Nothing)
         Catch ex As Exception
@@ -33,7 +33,12 @@
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click 'Delete selected rows (not selected cells)
-        If MessageBox.Show("Are you sure?", "Delete Confirmation", MessageBoxButtons.YesNoCancel) = DialogResult.Yes Then
+        If dgvTags.SelectedRows.Count = 0 Then 'Communicate the selection process to the user
+            MessageBox.Show(Me, "No rows selected. Please select one or more rows by clicking the arrow at the beginning of each row.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        If MessageBox.Show("Are you sure?", "Delete Confirmation", MessageBoxButtons.YesNoCancel) = DialogResult.Yes Then 'Confirmation box to account for accidents
             For Each row As DataGridViewRow In dgvTags.SelectedRows
                 TagsTableAdapter.Delete(row.Cells.Item(0).Value, row.Cells.Item(1).Value)
             Next
@@ -42,5 +47,18 @@
 
             TagsTableAdapter.Fill(RegisterDBTables.Tags)
         End If
+    End Sub
+
+    Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+        Select Case cbxColumn.Text
+            Case "Id"
+                TagsTableAdapter.FillById(RegisterDBTables.Tags, tbxFilter.Text)
+            Case "Name"
+                TagsTableAdapter.FillByName(RegisterDBTables.Tags, tbxFilter.Text)
+        End Select
+    End Sub
+
+    Private Sub btnClearFilter_Click(sender As Object, e As EventArgs) Handles btnClearFilter.Click
+        TagsTableAdapter.Fill(RegisterDBTables.Tags)
     End Sub
 End Class

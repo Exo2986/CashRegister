@@ -1,4 +1,2 @@
-﻿
-
-Partial Class RegisterDBTables
+﻿Partial Class RegisterDBTables
 End Class
