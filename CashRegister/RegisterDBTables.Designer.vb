@@ -662,6 +662,8 @@ Partial Public Class RegisterDBTables
         
         Private columnName As Global.System.Data.DataColumn
         
+        Private columnTaxes As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub New()
@@ -714,6 +716,14 @@ Partial Public Class RegisterDBTables
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property TaxesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTaxes
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -750,9 +760,9 @@ Partial Public Class RegisterDBTables
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Function AddTagsRow(ByVal Id As String, ByVal Name As String) As TagsRow
+        Public Overloads Function AddTagsRow(ByVal Id As String, ByVal Name As String, ByVal Taxes As String) As TagsRow
             Dim rowTagsRow As TagsRow = CType(Me.NewRow,TagsRow)
-            Dim columnValuesArray() As Object = New Object() {Id, Name}
+            Dim columnValuesArray() As Object = New Object() {Id, Name, Taxes}
             rowTagsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowTagsRow)
             Return rowTagsRow
@@ -783,6 +793,7 @@ Partial Public Class RegisterDBTables
         Friend Sub InitVars()
             Me.columnId = MyBase.Columns("Id")
             Me.columnName = MyBase.Columns("Name")
+            Me.columnTaxes = MyBase.Columns("Taxes")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -792,6 +803,8 @@ Partial Public Class RegisterDBTables
             MyBase.Columns.Add(Me.columnId)
             Me.columnName = New Global.System.Data.DataColumn("Name", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnName)
+            Me.columnTaxes = New Global.System.Data.DataColumn("Taxes", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTaxes)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnId}, true))
             Me.columnId.AllowDBNull = false
             Me.columnId.Unique = true
@@ -941,6 +954,8 @@ Partial Public Class RegisterDBTables
         
         Private columnModifier As Global.System.Data.DataColumn
         
+        Private columnTags As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Sub New()
@@ -1001,6 +1016,14 @@ Partial Public Class RegisterDBTables
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public ReadOnly Property TagsColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTags
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -1037,9 +1060,9 @@ Partial Public Class RegisterDBTables
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Function AddTaxesRow(ByVal Id As String, ByVal Name As String, ByVal Modifier As Decimal) As TaxesRow
+        Public Overloads Function AddTaxesRow(ByVal Id As String, ByVal Name As String, ByVal Modifier As Decimal, ByVal Tags As String) As TaxesRow
             Dim rowTaxesRow As TaxesRow = CType(Me.NewRow,TaxesRow)
-            Dim columnValuesArray() As Object = New Object() {Id, Name, Modifier}
+            Dim columnValuesArray() As Object = New Object() {Id, Name, Modifier, Tags}
             rowTaxesRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowTaxesRow)
             Return rowTaxesRow
@@ -1071,6 +1094,7 @@ Partial Public Class RegisterDBTables
             Me.columnId = MyBase.Columns("Id")
             Me.columnName = MyBase.Columns("Name")
             Me.columnModifier = MyBase.Columns("Modifier")
+            Me.columnTags = MyBase.Columns("Tags")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1082,6 +1106,8 @@ Partial Public Class RegisterDBTables
             MyBase.Columns.Add(Me.columnName)
             Me.columnModifier = New Global.System.Data.DataColumn("Modifier", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnModifier)
+            Me.columnTags = New Global.System.Data.DataColumn("Tags", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTags)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnId}, true))
             Me.columnId.AllowDBNull = false
             Me.columnId.Unique = true
@@ -1089,6 +1115,7 @@ Partial Public Class RegisterDBTables
             Me.columnName.AllowDBNull = false
             Me.columnName.MaxLength = 50
             Me.columnModifier.AllowDBNull = false
+            Me.columnTags.AllowDBNull = false
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1330,6 +1357,33 @@ Partial Public Class RegisterDBTables
                 Me(Me.tableTags.NameColumn) = value
             End Set
         End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Taxes() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableTags.TaxesColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Taxes' in table 'Tags' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableTags.TaxesColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Function IsTaxesNull() As Boolean
+            Return Me.IsNull(Me.tableTags.TaxesColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Sub SetTaxesNull()
+            Me(Me.tableTags.TaxesColumn) = Global.System.Convert.DBNull
+        End Sub
     End Class
     
     '''<summary>
@@ -1377,6 +1431,17 @@ Partial Public Class RegisterDBTables
             End Get
             Set
                 Me(Me.tableTaxes.ModifierColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+        Public Property Tags() As String
+            Get
+                Return CType(Me(Me.tableTaxes.TagsColumn),String)
+            End Get
+            Set
+                Me(Me.tableTaxes.TagsColumn) = value
             End Set
         End Property
     End Class
@@ -2632,6 +2697,7 @@ Namespace RegisterDBTablesTableAdapters
             tableMapping.ColumnMappings.Add("Id", "Id")
             tableMapping.ColumnMappings.Add("Name", "Name")
             tableMapping.ColumnMappings.Add("Modifier", "Modifier")
+            tableMapping.ColumnMappings.Add("Tags", "Tags")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
@@ -2643,21 +2709,24 @@ Namespace RegisterDBTablesTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Modifier", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 12, 4, "Modifier", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Taxes] ([Id], [Name], [Modifier]) VALUES (@Id, @Name, @Modifie"& _ 
-                "r);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Id, Name, Modifier FROM Taxes WHERE (Id = @Id)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Taxes] ([Id], [Name], [Modifier], [Tags]) VALUES (@Id, @Name, "& _ 
+                "@Modifier, @Tags);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Id, Name, Modifier, Tags FROM Taxes WHERE (Id = @Id)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Id", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Id", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Modifier", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 12, 4, "Modifier", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Tags", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Tags", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Taxes] SET [Id] = @Id, [Name] = @Name, [Modifier] = @Modifier WHERE"& _ 
-                " (([Id] = @Original_Id) AND ([Name] = @Original_Name) AND ([Modifier] = @Origina"& _ 
-                "l_Modifier));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Id, Name, Modifier FROM Taxes WHERE (Id = @Id)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Taxes] SET [Id] = @Id, [Name] = @Name, [Modifier] = @Modifier, [Tag"& _ 
+                "s] = @Tags WHERE (([Id] = @Original_Id) AND ([Name] = @Original_Name) AND ([Modi"& _ 
+                "fier] = @Original_Modifier));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Id, Name, Modifier, Tags FROM Taxes WHERE "& _ 
+                "(Id = @Id)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Id", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Id", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Modifier", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 12, 4, "Modifier", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Tags", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Tags", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Id", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Id", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Name", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Modifier", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 12, 4, "Modifier", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
@@ -2673,11 +2742,48 @@ Namespace RegisterDBTablesTableAdapters
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitCommandCollection()
-            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(6) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT Id, Name, Modifier FROM dbo.Taxes"
+            Me._commandCollection(0).CommandText = "SELECT Id, Name, Modifier, Tags FROM dbo.Taxes"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(1).Connection = Me.Connection
+            Me._commandCollection(1).CommandText = "DELETE FROM [dbo].[Taxes] WHERE (([Id] = @Original_Id) AND ([Name] = @Original_Na"& _ 
+                "me) AND ([Modifier] = @Original_Modifier))"
+            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Id", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "Id", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Name", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "Name", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_Modifier", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 12, 4, "Modifier", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(2).Connection = Me.Connection
+            Me._commandCollection(2).CommandText = "SELECT Id, Modifier, Name, Tags FROM Taxes WHERE (Id LIKE '%' + @Value + '%')"
+            Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Value", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "Id", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(3).Connection = Me.Connection
+            Me._commandCollection(3).CommandText = "SELECT Id, Modifier, Name, Tags FROM Taxes WHERE (Modifier LIKE '%' + @Value + '%"& _ 
+                "')"
+            Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Value", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 12, 4, "Modifier", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(4).Connection = Me.Connection
+            Me._commandCollection(4).CommandText = "SELECT Id, Modifier, Name, Tags FROM Taxes WHERE (Name LIKE '%' + @Value + '%')"
+            Me._commandCollection(4).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Value", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "Name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(5).Connection = Me.Connection
+            Me._commandCollection(5).CommandText = "SELECT Id, Modifier, Name, Tags FROM Taxes WHERE (Id = @Id)"
+            Me._commandCollection(5).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Id", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "Id", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(6) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(6).Connection = Me.Connection
+            Me._commandCollection(6).CommandText = "UPDATE [dbo].[Taxes] SET [Tags] = convert(nvarchar(MAX),@Tags) WHERE (([Id] = @Id"& _ 
+                ") AND ([Name] = @Name));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Id, Name, Modifier FROM Taxes WHERE (Id = @Id)"
+            Me._commandCollection(6).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Tags", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, "Tags", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Id", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "Id", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Name", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "Name", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2699,6 +2805,72 @@ Namespace RegisterDBTablesTableAdapters
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
         Public Overloads Overridable Function GetData() As RegisterDBTables.TaxesDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As RegisterDBTables.TaxesDataTable = New RegisterDBTables.TaxesDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByID(ByVal dataTable As RegisterDBTables.TaxesDataTable, ByVal Value As String) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(2)
+            If (Value Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Value")
+            Else
+                Me.Adapter.SelectCommand.Parameters(0).Value = CType(Value,String)
+            End If
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByModifier(ByVal dataTable As RegisterDBTables.TaxesDataTable, ByVal Value As Decimal) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(3)
+            Me.Adapter.SelectCommand.Parameters(0).Value = CType(Value,Decimal)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByName(ByVal dataTable As RegisterDBTables.TaxesDataTable, ByVal Value As String) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(4)
+            If (Value Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Value")
+            Else
+                Me.Adapter.SelectCommand.Parameters(0).Value = CType(Value,String)
+            End If
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetDataBy5(ByVal Id As String) As RegisterDBTables.TaxesDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(5)
+            If (Id Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Id")
+            Else
+                Me.Adapter.SelectCommand.Parameters(0).Value = CType(Id,String)
+            End If
             Dim dataTable As RegisterDBTables.TaxesDataTable = New RegisterDBTables.TaxesDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
@@ -2767,7 +2939,7 @@ Namespace RegisterDBTablesTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal Id As String, ByVal Name As String, ByVal Modifier As Decimal) As Integer
+        Public Overloads Overridable Function Insert(ByVal Id As String, ByVal Name As String, ByVal Modifier As Decimal, ByVal Tags As String) As Integer
             If (Id Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Id")
             Else
@@ -2779,6 +2951,11 @@ Namespace RegisterDBTablesTableAdapters
                 Me.Adapter.InsertCommand.Parameters(1).Value = CType(Name,String)
             End If
             Me.Adapter.InsertCommand.Parameters(2).Value = CType(Modifier,Decimal)
+            If (Tags Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Tags")
+            Else
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(Tags,String)
+            End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
             If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -2798,7 +2975,7 @@ Namespace RegisterDBTablesTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal Id As String, ByVal Name As String, ByVal Modifier As Decimal, ByVal Original_Id As String, ByVal Original_Name As String, ByVal Original_Modifier As Decimal) As Integer
+        Public Overloads Overridable Function Update(ByVal Id As String, ByVal Name As String, ByVal Modifier As Decimal, ByVal Tags As String, ByVal Original_Id As String, ByVal Original_Name As String, ByVal Original_Modifier As Decimal) As Integer
             If (Id Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Id")
             Else
@@ -2810,17 +2987,22 @@ Namespace RegisterDBTablesTableAdapters
                 Me.Adapter.UpdateCommand.Parameters(1).Value = CType(Name,String)
             End If
             Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Modifier,Decimal)
+            If (Tags Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Tags")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Tags,String)
+            End If
             If (Original_Id Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Id")
             Else
-                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Original_Id,String)
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Original_Id,String)
             End If
             If (Original_Name Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_Name")
             Else
-                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Original_Name,String)
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Original_Name,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Original_Modifier,Decimal)
+            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(Original_Modifier,Decimal)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -2840,8 +3022,78 @@ Namespace RegisterDBTablesTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal Name As String, ByVal Modifier As Decimal, ByVal Original_Id As String, ByVal Original_Name As String, ByVal Original_Modifier As Decimal) As Integer
-            Return Me.Update(Original_Id, Name, Modifier, Original_Id, Original_Name, Original_Modifier)
+        Public Overloads Overridable Function Update(ByVal Name As String, ByVal Modifier As Decimal, ByVal Tags As String, ByVal Original_Id As String, ByVal Original_Name As String, ByVal Original_Modifier As Decimal) As Integer
+            Return Me.Update(Original_Id, Name, Modifier, Tags, Original_Id, Original_Name, Original_Modifier)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, false)>  _
+        Public Overloads Overridable Function DeleteQuery(ByVal Original_Id As String, ByVal Original_Name As String, ByVal Original_Modifier As Decimal) As Integer
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(1)
+            If (Original_Id Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_Id")
+            Else
+                command.Parameters(0).Value = CType(Original_Id,String)
+            End If
+            If (Original_Name Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Original_Name")
+            Else
+                command.Parameters(1).Value = CType(Original_Name,String)
+            End If
+            command.Parameters(2).Value = CType(Original_Modifier,Decimal)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open
+            End If
+            Dim returnValue As Integer
+            Try 
+                returnValue = command.ExecuteNonQuery
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close
+                End If
+            End Try
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
+        Public Overloads Overridable Function UpdateQuery(ByVal Tags As String, ByVal Id As String, ByVal Name As String) As Integer
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(6)
+            If (Tags Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Tags")
+            Else
+                command.Parameters(0).Value = CType(Tags,String)
+            End If
+            If (Id Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Id")
+            Else
+                command.Parameters(1).Value = CType(Id,String)
+            End If
+            If (Name Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("Name")
+            Else
+                command.Parameters(2).Value = CType(Name,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open
+            End If
+            Dim returnValue As Integer
+            Try 
+                returnValue = command.ExecuteNonQuery
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close
+                End If
+            End Try
+            Return returnValue
         End Function
     End Class
     

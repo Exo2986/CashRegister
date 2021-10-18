@@ -40,13 +40,13 @@ Partial Class fTagManager
         Me.cbxColumn = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgvTags = New System.Windows.Forms.DataGridView()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.IdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TagsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.RegisterDBTables = New CashRegister.RegisterDBTables()
         Me.TagsTableAdapter = New CashRegister.RegisterDBTablesTableAdapters.TagsTableAdapter()
         Me.TableAdapterManager = New CashRegister.RegisterDBTablesTableAdapters.TableAdapterManager()
-        Me.Button1 = New System.Windows.Forms.Button()
         IdLabel = New System.Windows.Forms.Label()
         NameLabel = New System.Windows.Forms.Label()
         Me.tabFilter.SuspendLayout()
@@ -224,6 +224,15 @@ Partial Class fTagManager
         Me.dgvTags.Size = New System.Drawing.Size(480, 369)
         Me.dgvTags.TabIndex = 5
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(323, 388)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(170, 27)
+        Me.Button1.TabIndex = 6
+        Me.Button1.Text = "View Associated Taxes"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'IdDataGridViewTextBoxColumn
         '
         Me.IdDataGridViewTextBoxColumn.DataPropertyName = "Id"
@@ -257,15 +266,6 @@ Partial Class fTagManager
         Me.TableAdapterManager.TagsTableAdapter = Me.TagsTableAdapter
         Me.TableAdapterManager.TaxesTableAdapter = Nothing
         Me.TableAdapterManager.UpdateOrder = CashRegister.RegisterDBTablesTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(323, 388)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(170, 27)
-        Me.Button1.TabIndex = 6
-        Me.Button1.Text = "View Associated Taxes"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'fTagManager
         '
