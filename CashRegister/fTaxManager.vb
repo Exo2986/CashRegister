@@ -3,17 +3,12 @@
     Const strAPPLY_TAGS_SUCCESS = "Tags successfully applied."
 
     Private Sub fTaxManager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.TagsTableAdapter.Fill(Me.RegisterDBTables.Tags)
         Me.TaxesTableAdapter.Fill(Me.RegisterDBTables.Taxes)
 
         For Each row As DataRow In RegisterDBTables.Tags
             lbxTags.Items.Add(row.ItemArray(0), False)
         Next
-        lbxTags.Items.Add("1")
-        lbxTags.Items.Add("21")
-        lbxTags.Items.Add("13")
-        lbxTags.Items.Add("14")
-        lbxTags.Items.Add("15")
-        lbxTags.Items.Add("16")
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -42,7 +37,7 @@
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         tbxID.Clear()
         tbxName.Clear()
-        nbxModifier.ResetText()
+        nbxModifier.Value = 0.0
     End Sub
 
     Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click

@@ -22,21 +22,20 @@ Partial Class fRegister
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.spltBase = New System.Windows.Forms.SplitContainer()
         Me.tabcItems = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.ProductsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.RegisterDBDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.btnOpenTax = New System.Windows.Forms.Button()
+        Me.btnOpenTag = New System.Windows.Forms.Button()
+        Me.btnOpenProduct = New System.Windows.Forms.Button()
         CType(Me.spltBase, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltBase.Panel1.SuspendLayout()
         Me.spltBase.SuspendLayout()
         Me.tabcItems.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        CType(Me.ProductsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.RegisterDBDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage2.SuspendLayout()
         Me.SuspendLayout()
         '
         'spltBase
@@ -78,21 +77,6 @@ Partial Class fRegister
         Me.TabPage1.Text = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'ProductsBindingSource
-        '
-        Me.ProductsBindingSource.DataMember = "Products"
-        Me.ProductsBindingSource.DataSource = Me.RegisterDBDataSetBindingSource
-        '
-        'TabPage2
-        '
-        Me.TabPage2.Location = New System.Drawing.Point(79, 4)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(586, 753)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "TabPage2"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 2
@@ -106,6 +90,46 @@ Partial Class fRegister
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(580, 747)
         Me.TableLayoutPanel1.TabIndex = 0
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.btnOpenProduct)
+        Me.TabPage2.Controls.Add(Me.btnOpenTax)
+        Me.TabPage2.Controls.Add(Me.btnOpenTag)
+        Me.TabPage2.Location = New System.Drawing.Point(79, 4)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(586, 753)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'btnOpenTax
+        '
+        Me.btnOpenTax.Location = New System.Drawing.Point(230, 30)
+        Me.btnOpenTax.Name = "btnOpenTax"
+        Me.btnOpenTax.Size = New System.Drawing.Size(111, 35)
+        Me.btnOpenTax.TabIndex = 1
+        Me.btnOpenTax.Text = "Tax Manager"
+        Me.btnOpenTax.UseVisualStyleBackColor = True
+        '
+        'btnOpenTag
+        '
+        Me.btnOpenTag.Location = New System.Drawing.Point(83, 30)
+        Me.btnOpenTag.Name = "btnOpenTag"
+        Me.btnOpenTag.Size = New System.Drawing.Size(111, 35)
+        Me.btnOpenTag.TabIndex = 0
+        Me.btnOpenTag.Text = "Tag Manager"
+        Me.btnOpenTag.UseVisualStyleBackColor = True
+        '
+        'btnOpenProduct
+        '
+        Me.btnOpenProduct.Location = New System.Drawing.Point(377, 30)
+        Me.btnOpenProduct.Name = "btnOpenProduct"
+        Me.btnOpenProduct.Size = New System.Drawing.Size(131, 35)
+        Me.btnOpenProduct.TabIndex = 2
+        Me.btnOpenProduct.Text = "Product Manager"
+        Me.btnOpenProduct.UseVisualStyleBackColor = True
         '
         'fRegister
         '
@@ -122,7 +146,7 @@ Partial Class fRegister
         Me.spltBase.ResumeLayout(False)
         Me.tabcItems.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
-        CType(Me.ProductsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -131,7 +155,8 @@ Partial Class fRegister
     Friend WithEvents tabcItems As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents RegisterDBDataSetBindingSource As BindingSource
-    Friend WithEvents ProductsBindingSource As BindingSource
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents btnOpenTax As Button
+    Friend WithEvents btnOpenTag As Button
+    Friend WithEvents btnOpenProduct As Button
 End Class

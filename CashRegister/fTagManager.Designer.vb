@@ -40,13 +40,14 @@ Partial Class fTagManager
         Me.cbxColumn = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgvTags = New System.Windows.Forms.DataGridView()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.IdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TagsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.RegisterDBTables = New CashRegister.RegisterDBTables()
+        Me.btnAssocTaxes = New System.Windows.Forms.Button()
         Me.TagsTableAdapter = New CashRegister.RegisterDBTablesTableAdapters.TagsTableAdapter()
         Me.TableAdapterManager = New CashRegister.RegisterDBTablesTableAdapters.TableAdapterManager()
+        Me.TaxesTableAdapter = New CashRegister.RegisterDBTablesTableAdapters.TaxesTableAdapter()
         IdLabel = New System.Windows.Forms.Label()
         NameLabel = New System.Windows.Forms.Label()
         Me.tabFilter.SuspendLayout()
@@ -224,15 +225,6 @@ Partial Class fTagManager
         Me.dgvTags.Size = New System.Drawing.Size(480, 369)
         Me.dgvTags.TabIndex = 5
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(323, 388)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(170, 27)
-        Me.Button1.TabIndex = 6
-        Me.Button1.Text = "View Associated Taxes"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'IdDataGridViewTextBoxColumn
         '
         Me.IdDataGridViewTextBoxColumn.DataPropertyName = "Id"
@@ -255,6 +247,15 @@ Partial Class fTagManager
         Me.RegisterDBTables.DataSetName = "RegisterDBTables"
         Me.RegisterDBTables.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
+        'btnAssocTaxes
+        '
+        Me.btnAssocTaxes.Location = New System.Drawing.Point(323, 388)
+        Me.btnAssocTaxes.Name = "btnAssocTaxes"
+        Me.btnAssocTaxes.Size = New System.Drawing.Size(170, 27)
+        Me.btnAssocTaxes.TabIndex = 6
+        Me.btnAssocTaxes.Text = "View Associated Taxes"
+        Me.btnAssocTaxes.UseVisualStyleBackColor = True
+        '
         'TagsTableAdapter
         '
         Me.TagsTableAdapter.ClearBeforeFill = True
@@ -267,12 +268,16 @@ Partial Class fTagManager
         Me.TableAdapterManager.TaxesTableAdapter = Nothing
         Me.TableAdapterManager.UpdateOrder = CashRegister.RegisterDBTablesTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         '
+        'TaxesTableAdapter
+        '
+        Me.TaxesTableAdapter.ClearBeforeFill = True
+        '
         'fTagManager
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(509, 580)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnAssocTaxes)
         Me.Controls.Add(Me.dgvTags)
         Me.Controls.Add(Me.tabFilter)
         Me.Controls.Add(Me.btnDelete)
@@ -312,5 +317,6 @@ Partial Class fTagManager
     Friend WithEvents Label2 As Label
     Friend WithEvents cbxColumn As ComboBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnAssocTaxes As Button
+    Friend WithEvents TaxesTableAdapter As RegisterDBTablesTableAdapters.TaxesTableAdapter
 End Class

@@ -51,6 +51,9 @@ Partial Class fTaxManager
         Me.lbxTags = New System.Windows.Forms.CheckedListBox()
         Me.btnApplyTags = New System.Windows.Forms.Button()
         Me.btnSelection = New System.Windows.Forms.Button()
+        Me.TagsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.TagsTableAdapter = New CashRegister.RegisterDBTablesTableAdapters.TagsTableAdapter()
+        Me.TableAdapterManager = New CashRegister.RegisterDBTablesTableAdapters.TableAdapterManager()
         IdLabel = New System.Windows.Forms.Label()
         NameLabel = New System.Windows.Forms.Label()
         Label3 = New System.Windows.Forms.Label()
@@ -61,6 +64,7 @@ Partial Class fTaxManager
         CType(Me.dgvTaxes, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TaxesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.RegisterDBTables, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TagsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'IdLabel
@@ -234,7 +238,7 @@ Partial Class fTaxManager
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(170, 27)
         Me.btnDelete.TabIndex = 7
-        Me.btnDelete.Text = "Delete Selected Tag(s)"
+        Me.btnDelete.Text = "Delete Selected Row(s)"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'dgvTaxes
@@ -314,11 +318,28 @@ Partial Class fTaxManager
         Me.btnSelection.Text = "Select/Deselect All"
         Me.btnSelection.UseVisualStyleBackColor = True
         '
+        'TagsBindingSource
+        '
+        Me.TagsBindingSource.DataMember = "Tags"
+        Me.TagsBindingSource.DataSource = Me.RegisterDBTables
+        '
+        'TagsTableAdapter
+        '
+        Me.TagsTableAdapter.ClearBeforeFill = True
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.ProductsTableAdapter = Nothing
+        Me.TableAdapterManager.TagsTableAdapter = Me.TagsTableAdapter
+        Me.TableAdapterManager.TaxesTableAdapter = Me.TaxesTableAdapter
+        Me.TableAdapterManager.UpdateOrder = CashRegister.RegisterDBTablesTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        '
         'fTaxManager
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(830, 615)
+        Me.ClientSize = New System.Drawing.Size(838, 616)
         Me.Controls.Add(Me.btnSelection)
         Me.Controls.Add(Me.btnApplyTags)
         Me.Controls.Add(Me.lbxTags)
@@ -338,6 +359,7 @@ Partial Class fTaxManager
         CType(Me.dgvTaxes, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.TaxesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.RegisterDBTables, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TagsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -366,4 +388,7 @@ Partial Class fTaxManager
     Friend WithEvents lbxTags As CheckedListBox
     Friend WithEvents btnApplyTags As Button
     Friend WithEvents btnSelection As Button
+    Friend WithEvents TagsBindingSource As BindingSource
+    Friend WithEvents TagsTableAdapter As RegisterDBTablesTableAdapters.TagsTableAdapter
+    Friend WithEvents TableAdapterManager As RegisterDBTablesTableAdapters.TableAdapterManager
 End Class
