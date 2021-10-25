@@ -94,6 +94,12 @@
     <Compile Include="fNewProduct.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="fPageManager.Designer.vb">
+      <DependentUpon>fPageManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="fPageManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="fTaxManager.Designer.vb">
       <DependentUpon>fTaxManager.vb</DependentUpon>
     </Compile>
@@ -141,6 +147,9 @@
   <ItemGroup>
     <EmbeddedResource Include="fNewProduct.resx">
       <DependentUpon>fNewProduct.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fPageManager.resx">
+      <DependentUpon>fPageManager.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fRegister.resx">
       <DependentUpon>fRegister.vb</DependentUpon>

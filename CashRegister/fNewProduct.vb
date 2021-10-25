@@ -22,8 +22,6 @@
             Next
 
             lbxTags.Visible = True
-        Else
-
         End If
     End Sub
 

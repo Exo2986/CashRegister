@@ -77,17 +77,11 @@
 
             Dim currentTags = row.Tags.Split(";")
 
-            'For Each tagId As String In currentTags
-            '   lbxTags.SetItemChecked(lbxTags.Items.IndexOf(tagId), True)
-            'Next
-
             For i As Integer = 0 To lbxTags.Items.Count - 1 Step 1 'Change checked tags to match database
                 lbxTags.SetItemChecked(i, currentTags.Contains(lbxTags.Items.Item(i).ToString()))
             Next
 
             lbxTags.Visible = True
-        Else
-
         End If
     End Sub
 

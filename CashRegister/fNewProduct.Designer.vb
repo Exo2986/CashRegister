@@ -255,7 +255,7 @@ Partial Class fNewProduct
         Me.tbpgNew.Padding = New System.Windows.Forms.Padding(3)
         Me.tbpgNew.Size = New System.Drawing.Size(476, 154)
         Me.tbpgNew.TabIndex = 0
-        Me.tbpgNew.Text = "Add New Tag"
+        Me.tbpgNew.Text = "Add New Product"
         Me.tbpgNew.UseVisualStyleBackColor = True
         '
         'tabFilter
@@ -322,6 +322,7 @@ Partial Class fNewProduct
         'TableAdapterManager
         '
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.PagesTableAdapter = Nothing
         Me.TableAdapterManager.ProductsTableAdapter = Nothing
         Me.TableAdapterManager.TagsTableAdapter = Me.TagsTableAdapter
         Me.TableAdapterManager.TaxesTableAdapter = Nothing
