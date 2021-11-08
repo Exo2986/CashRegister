@@ -26,10 +26,11 @@ Partial Class fRegister
         Me.spltBase = New System.Windows.Forms.SplitContainer()
         Me.tabcItems = New System.Windows.Forms.TabControl()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnPagesManager = New System.Windows.Forms.Button()
         Me.btnOpenProduct = New System.Windows.Forms.Button()
         Me.btnOpenTax = New System.Windows.Forms.Button()
         Me.btnOpenTag = New System.Windows.Forms.Button()
+        Me.flpReceipt = New System.Windows.Forms.FlowLayoutPanel()
         Me.RegisterDBTables = New CashRegister.RegisterDBTables()
         Me.ProductsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.ProductsTableAdapter = New CashRegister.RegisterDBTablesTableAdapters.ProductsTableAdapter()
@@ -41,6 +42,7 @@ Partial Class fRegister
         Me.PagesTableAdapter = New CashRegister.RegisterDBTablesTableAdapters.PagesTableAdapter()
         CType(Me.spltBase, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltBase.Panel1.SuspendLayout()
+        Me.spltBase.Panel2.SuspendLayout()
         Me.spltBase.SuspendLayout()
         Me.tabcItems.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -60,6 +62,10 @@ Partial Class fRegister
         'spltBase.Panel1
         '
         Me.spltBase.Panel1.Controls.Add(Me.tabcItems)
+        '
+        'spltBase.Panel2
+        '
+        Me.spltBase.Panel2.Controls.Add(Me.flpReceipt)
         Me.spltBase.Size = New System.Drawing.Size(984, 761)
         Me.spltBase.SplitterDistance = 669
         Me.spltBase.TabIndex = 0
@@ -78,7 +84,7 @@ Partial Class fRegister
         '
         'TabPage2
         '
-        Me.TabPage2.Controls.Add(Me.Button1)
+        Me.TabPage2.Controls.Add(Me.btnPagesManager)
         Me.TabPage2.Controls.Add(Me.btnOpenProduct)
         Me.TabPage2.Controls.Add(Me.btnOpenTax)
         Me.TabPage2.Controls.Add(Me.btnOpenTag)
@@ -90,14 +96,14 @@ Partial Class fRegister
         Me.TabPage2.Text = "Settings"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnPagesManager
         '
-        Me.Button1.Location = New System.Drawing.Point(195, 99)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(111, 42)
-        Me.Button1.TabIndex = 3
-        Me.Button1.Text = "Pages Manager"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnPagesManager.Location = New System.Drawing.Point(195, 99)
+        Me.btnPagesManager.Name = "btnPagesManager"
+        Me.btnPagesManager.Size = New System.Drawing.Size(111, 42)
+        Me.btnPagesManager.TabIndex = 3
+        Me.btnPagesManager.Text = "Pages Manager"
+        Me.btnPagesManager.UseVisualStyleBackColor = True
         '
         'btnOpenProduct
         '
@@ -125,6 +131,17 @@ Partial Class fRegister
         Me.btnOpenTag.TabIndex = 0
         Me.btnOpenTag.Text = "Tag Manager"
         Me.btnOpenTag.UseVisualStyleBackColor = True
+        '
+        'flpReceipt
+        '
+        Me.flpReceipt.AutoScroll = True
+        Me.flpReceipt.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.flpReceipt.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp
+        Me.flpReceipt.Location = New System.Drawing.Point(0, 0)
+        Me.flpReceipt.Name = "flpReceipt"
+        Me.flpReceipt.Size = New System.Drawing.Size(311, 761)
+        Me.flpReceipt.TabIndex = 0
+        Me.flpReceipt.WrapContents = False
         '
         'RegisterDBTables
         '
@@ -178,6 +195,7 @@ Partial Class fRegister
         Me.Name = "fRegister"
         Me.Text = "Cash Register"
         Me.spltBase.Panel1.ResumeLayout(False)
+        Me.spltBase.Panel2.ResumeLayout(False)
         CType(Me.spltBase, System.ComponentModel.ISupportInitialize).EndInit()
         Me.spltBase.ResumeLayout(False)
         Me.tabcItems.ResumeLayout(False)
@@ -204,7 +222,8 @@ Partial Class fRegister
     Friend WithEvents TagsTableAdapter As RegisterDBTablesTableAdapters.TagsTableAdapter
     Friend WithEvents TaxesBindingSource As BindingSource
     Friend WithEvents TaxesTableAdapter As RegisterDBTablesTableAdapters.TaxesTableAdapter
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnPagesManager As Button
     Friend WithEvents PagesBindingSource As BindingSource
     Friend WithEvents PagesTableAdapter As RegisterDBTablesTableAdapters.PagesTableAdapter
+    Friend WithEvents flpReceipt As FlowLayoutPanel
 End Class
