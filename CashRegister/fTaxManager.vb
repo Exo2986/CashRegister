@@ -115,4 +115,8 @@
             lbxTags.SetItemChecked(i, selectOrDeselect)
         Next
     End Sub
+
+    Private Sub fTaxManager_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        fRegister.UpdateTablesAndPages()
+    End Sub
 End Class

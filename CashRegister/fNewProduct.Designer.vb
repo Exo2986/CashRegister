@@ -203,6 +203,7 @@ Partial Class fNewProduct
         Me.nbxPrice.DecimalPlaces = 2
         Me.nbxPrice.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         Me.nbxPrice.Location = New System.Drawing.Point(217, 77)
+        Me.nbxPrice.Maximum = New Decimal(New Integer() {999999, 0, 0, 0})
         Me.nbxPrice.Name = "nbxPrice"
         Me.nbxPrice.Size = New System.Drawing.Size(100, 23)
         Me.nbxPrice.TabIndex = 4

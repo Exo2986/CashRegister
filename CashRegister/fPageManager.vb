@@ -116,4 +116,8 @@
     Private Sub btnClearFilter_Click(sender As Object, e As EventArgs) Handles btnClearFilter.Click
         PagesTableAdapter.Fill(Me.RegisterDBTables.Pages)
     End Sub
+
+    Private Sub fPageManager_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        fRegister.UpdateTablesAndPages()
+    End Sub
 End Class

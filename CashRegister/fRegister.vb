@@ -1,18 +1,101 @@
 ﻿Public Class fRegister
+    Private receipt As List(Of ReceiptItem) = New List(Of ReceiptItem)
+
+    Private subTotal As Decimal = 0
+    Private total As Decimal = 0
+    Private taxTotal As Decimal = 0
+
+    Private Sub AddReceiptItem(name As String)
+        Dim results = ProductsTableAdapter.GetDataById(name)
+
+        Dim taxes = New Dictionary(Of String, Decimal)
+
+        For Each tag As String In results.Item(0).Tags.Split(";"c) 'Find applicable taxes
+            Dim taxResults = TaxesTableAdapter.GetDataByTag(tag)
+            For Each row As RegisterDBTables.TaxesRow In taxResults.AsEnumerable()
+                If Not taxes.ContainsKey(row.Id) Then
+                    taxes.Add(row.Id, row.Modifier)
+                End If
+            Next
+        Next
+
+        Dim item = ReceiptItem.FromProductRow(results.Item(0), taxes)
+
+        receipt.Insert(0, item)
+
+        UpdateReceipt()
+    End Sub
+
+    Private Sub ModifyReceiptItemCount(name As String, quantity As Integer)
+        Dim index = receipt.FindIndex(Function(a As ReceiptItem)
+                                          Return a.Id.Equals(name)
+                                      End Function)
+
+        Dim item = receipt.Item(index)
+
+        receipt.RemoveAt(index)
+
+        If quantity > 0 Then
+            item.Quantity = quantity
+            receipt.Insert(index, item)
+        End If
+
+        UpdateReceipt()
+    End Sub
+
+    Private Sub UpdateReceipt()
+        Dim prevSelected = lbxReceipt.SelectedIndex
+        lbxReceipt.Items.Clear()
+
+        total = 0
+        subTotal = 0
+        taxTotal = 0
+        tbxSubtotal.Text = String.Empty
+        tbxTotal.Text = String.Empty
+        tbxTax.Text = String.Empty
+
+        For Each item As ReceiptItem In receipt
+            lbxReceipt.Items.Add(item)
+
+            subTotal += item.GetPrice()
+            taxTotal += item.GetCalculatedTax()
+        Next
+
+        total = subTotal + taxTotal
+
+        tbxSubtotal.Text = FormatCurrency(subTotal)
+        tbxTax.Text = FormatCurrency(taxTotal)
+        tbxTotal.Text = FormatCurrency(total)
+
+        If prevSelected < lbxReceipt.Items.Count And prevSelected >= 0 Then
+            lbxReceipt.SelectedIndex = prevSelected
+        End If
+    End Sub
+
     Private Sub fRegister_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'RegisterDBTables.Pages' table. You can move, or remove it, as needed.
-        Me.PagesTableAdapter.Fill(Me.RegisterDBTables.Pages)
-        'TODO: This line of code loads data into the 'RegisterDBTables.Taxes' table. You can move, or remove it, as needed.
+        UpdateTablesAndPages()
+    End Sub
+
+    Public Sub UpdateTablesAndPages()
         Me.TaxesTableAdapter.Fill(Me.RegisterDBTables.Taxes)
-        'TODO: This line of code loads data into the 'RegisterDBTables.Tags' table. You can move, or remove it, as needed.
         Me.TagsTableAdapter.Fill(Me.RegisterDBTables.Tags)
-        'TODO: This line of code loads data into the 'RegisterDBTables.Products' table. You can move, or remove it, as needed.
         Me.ProductsTableAdapter.Fill(Me.RegisterDBTables.Products)
+        Me.PagesTableAdapter.Fill(Me.RegisterDBTables.Pages)
+
+        receipt.Clear()
+        lbxReceipt.Items.Clear()
 
         SetupTabs()
     End Sub
 
     Private Sub SetupTabs() 'Instantiate Pages
+
+        For Each item As TabPage In tabcItems.TabPages
+            If String.IsNullOrWhiteSpace(item.Tag) Then
+                tabcItems.TabPages.Remove(item)
+            End If
+        Next
+
         For Each page As RegisterDBTables.PagesRow In RegisterDBTables.Pages 'Make a new tab for each page
             Dim tabPage As TabPage = New TabPage()
             tabPage.Text = page.Name
@@ -23,7 +106,7 @@
             layout.WrapContents = True
             layout.Dock = Dock.Fill
 
-            tabcItems.TabPages.Add(tabPage)
+            tabcItems.TabPages.Insert(0, tabPage)
 
             Dim products As List(Of RegisterDBTables.ProductsRow) = New List(Of RegisterDBTables.ProductsRow)
             For Each tag As String In page.Tags.Split(";") 'Search products that fit the tag criteria for this page without duplicates
@@ -47,39 +130,12 @@
                 Next
             Next
         Next
+
+        tabcItems.SelectedIndex = 0
     End Sub
 
     Private Sub btnAddItem_Click(sender As Button, e As EventArgs)
-        Dim results = ProductsTableAdapter.GetDataById(sender.Name)
-        Dim tbx = CreateReceiptLine(results.Item(0))
-    End Sub
-
-    Private Function CreateReceiptLine(item As RegisterDBTables.ProductsRow) As TextBox
-        Dim tbx As TextBox = New TextBox()
-        With tbx
-            .Name = item.Item(0) 'Give name equal to ID
-            .ReadOnly = True
-            .BorderStyle = BorderStyle.None
-            .BackColor = SystemColors.Window
-            .Font = btnOpenProduct.Font
-            .Size = New Size(flpReceipt.Width, 20)
-            .Text = "1x " & item.Name & " " & item.Price.ToString("c")
-        End With
-
-        AddHandler tbx.Enter, AddressOf ReceiptLineEnterFocus
-        AddHandler tbx.Leave, AddressOf ReceiptLineLeaveFocus
-
-        tbx.Parent = flpReceipt
-
-        Return tbx
-    End Function
-
-    Private Sub ReceiptLineEnterFocus(sender As TextBox, e As EventArgs)
-        sender.BackColor = SystemColors.Highlight
-    End Sub
-
-    Private Sub ReceiptLineLeaveFocus(sender As TextBox, e As EventArgs)
-        sender.BackColor = SystemColors.Window
+        AddReceiptItem(sender.Name)
     End Sub
 
     Private Sub btnOpenTag_Click(sender As Object, e As EventArgs) Handles btnOpenTag.Click
@@ -101,4 +157,88 @@
         Dim form = New fPageManager()
         form.Show()
     End Sub
+
+    Private Sub btnMinus_Click(sender As Object, e As EventArgs) Handles btnMinus.Click
+        If CheckIfItemSelected() Then
+            Dim item = receipt.Item(lbxReceipt.SelectedIndex)
+            ModifyReceiptItemCount(item.Id, item.Quantity - 1)
+        End If
+    End Sub
+
+    Private Sub btnQuantity_Click(sender As Object, e As EventArgs) Handles btnQuantity.Click
+
+        If CheckIfItemSelected() Then
+            Dim item = receipt.Item(lbxReceipt.SelectedIndex)
+            Dim complete = False
+
+            Do
+                Dim input As String = InputBox("Input the new quantity.")
+                Dim value As Integer = 0
+
+                If input.Length = 0 Then
+                    complete = True 'Do this so the user can escape without inputting anything and not risk losing information
+                ElseIf Integer.TryParse(input, value) Then
+                    ModifyReceiptItemCount(item.Id, value)
+                    complete = True
+                End If
+            Loop Until complete
+        End If
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        If CheckIfItemSelected() Then
+            Dim item = receipt.Item(lbxReceipt.SelectedIndex)
+            ModifyReceiptItemCount(item.Id, item.Quantity + 1)
+        End If
+
+    End Sub
+
+    Private Function CheckIfItemSelected() As Boolean
+        If lbxReceipt.SelectedIndex >= 0 Then
+            Return True
+        Else
+            MessageBox.Show("Please select an item in the receipt.")
+            Return False
+        End If
+    End Function
+End Class
+
+Public Class ReceiptItem
+    Public Id As String
+    Public Name As String
+    Public SinglePrice As Decimal
+    Public Quantity As Integer
+    Public TotalTax As Decimal
+
+    Public Function GetPrice() As Decimal
+        Return SinglePrice * Quantity * 1.0
+    End Function
+    Public Overrides Function ToString() As String
+        Return String.Format("{0}x {1} {2}", Quantity, Name, FormatCurrency(GetPrice()))
+    End Function
+
+    Public Function GetCalculatedTax() As Decimal
+        Return GetPrice() * TotalTax
+    End Function
+
+    Public Function GetCalculatedTotal() As Decimal
+        Return GetPrice() + GetCalculatedTax()
+    End Function
+
+    Public Shared Function FromProductRow(row As RegisterDBTables.ProductsRow, taxes As Dictionary(Of String, Decimal)) As ReceiptItem
+        Dim item = New ReceiptItem()
+        With item
+            .Id = row.Id
+            .Name = row.Name
+            .SinglePrice = row.Price
+            .Quantity = 1
+            .TotalTax = 0
+        End With
+
+        For Each pair As KeyValuePair(Of String, Decimal) In taxes
+            item.TotalTax += pair.Value
+        Next
+
+        Return item
+    End Function
 End Class

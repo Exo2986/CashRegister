@@ -81,4 +81,8 @@
             MessageBox.Show(Me, taxStr, "Associated Taxes")
         Next
     End Sub
+
+    Private Sub fTagManager_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        fRegister.UpdateTablesAndPages()
+    End Sub
 End Class

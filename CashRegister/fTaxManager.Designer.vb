@@ -128,6 +128,7 @@ Partial Class fTaxManager
         Me.nbxModifier.DecimalPlaces = 2
         Me.nbxModifier.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         Me.nbxModifier.Location = New System.Drawing.Point(217, 77)
+        Me.nbxModifier.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.nbxModifier.Name = "nbxModifier"
         Me.nbxModifier.Size = New System.Drawing.Size(100, 23)
         Me.nbxModifier.TabIndex = 4
